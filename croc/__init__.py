@@ -158,8 +158,9 @@ class ScoredData:
                 % (self.num_pos, self.num_neg)
             )
 
-        from sympy import Rational
-        from sympy import cache
+        # from sympy import Rational
+        # from sympy import cache
+        from fractions import Fraction as Rational
 
         def smooth_ties(ties):
             sum = 0
@@ -216,7 +217,7 @@ class ScoredData:
 
         assert TN == 0
         assert FN == 0
-        cache.clear_cache()
+        # cache.clear_cache()
 
     def sweep_threshold_best(self):
         """Equivalent to the sweep_threshold method, but assumes all the positives are ranked at the top of the list."""
