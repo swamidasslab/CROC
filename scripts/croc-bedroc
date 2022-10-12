@@ -1,0 +1,6 @@
+#!/usr/bin/python
+from croc.bedroc import main
+import sys
+
+if __name__=="__main__":
+    main(sys.argv[1:])

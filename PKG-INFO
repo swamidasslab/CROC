@@ -1,0 +1,55 @@
+Metadata-Version: 1.1
+Name: CROC
+Version: 1.1.26
+Summary: A package for calculating ROC curves and Concentrated ROC (CROC) curves.
+Home-page: http://swami.wustl.edu/CROC
+Author: S. Joshua Swamidass
+Author-email: swamidass@gmail.com
+License: UNKNOWN
+Description: ================
+        The CROC Package
+        ================
+        
+        A package for calculating ROC curves and Concentrated ROC (CROC) curves written by `Dr. S. Joshua Swamidass <http://swami.wustl.edu>`_.
+        
+        Citation
+        --------
+        
+          | **A CROC Stronger than ROC: Measuring, Visualizing, and Optimizing Early Retrieval**
+          | S. Joshua Swamidass, Chloe-Agathe Azencott, Kenny Daily and Pierre Baldi
+          | *Bioinformatics*, April 2010, `doi:10.1093/bioinformatics/btq140 <http://bioinformatics.oxfordjournals.org/cgi/content/abstract/btq140>`_
+        
+        Description
+        -----------
+        
+        This pure-python package is designed to be a standardized implementation of performance curves
+        and metrics for use either in python scripts or through a simple commandline interface. As a standardized implementation
+        its output is robust enough to be using in publishable scientific work.
+        
+        With this package, one can easily:
+        
+        #. Compute the coordinates of both Accumulation Curves and ROC curves.
+        #. Handle ties appropriately using several methods.
+        #. Compute the BEDROC metric.
+        #. Vertically add and average the performance curves of several cross-validation folds.
+        #. Focus on the early part of the ROC curve by using several x-axis transforms.
+        
+        The docstrings in this module are fairly complete and the scripts provide simple access to
+        the most common functions. Further documentation can be found at http://swami.wustl.edu/CROC/
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: Free for non-commercial use
+Classifier: Natural Language :: English
+Classifier: Environment :: Console
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: Topic :: Scientific/Engineering :: Chemistry
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Scientific/Engineering :: Mathematics
+Classifier: Topic :: Scientific/Engineering :: Medical Science Apps.
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Requires: sympy
