@@ -34,8 +34,8 @@ except ValueError:
 
 VERSION = "1.1."+revset
 
-print warning
-print "assuming that the version is " + VERSION
+print(warning)
+print("assuming that the version is " + VERSION)
 
 setup(name="CROC",
     version=VERSION,

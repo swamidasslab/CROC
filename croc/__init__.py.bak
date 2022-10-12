@@ -1,6 +1,5 @@
 import math
 import random
-from functools import reduce
 
 def SampleCurves(sample, N=500):
     """A convenience function which samples random curves and returns (1) a vertically averaged curve
@@ -175,7 +174,7 @@ class ScoredData:
 
         yield TP, TN, FP, FN
  
-        SCORES = list(self.score_labels.items())
+        SCORES = self.score_labels.items()
         SCORES.sort()
         SCORES.reverse()
 
@@ -350,7 +349,7 @@ class Curve:
 
     def write_to_file(self, file):
         for x, y in self:
-            print(x, y, file=file)
+            print >>file, x, y
 
     @staticmethod
     def read_from_file(file):

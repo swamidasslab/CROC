@@ -43,25 +43,25 @@ def main(argv):
         std_error = std_deviation / ( options.samples ** 0.5 )
         
         curve.write_to_file(sys.stdout)
-        print("Area Under Curve (average) = ", average, file=sys.stderr)
-        print("Area Under Curve (standard deviation) = ", std_deviation, file=sys.stderr)
-        print("Area Under Curve (standard error) = ", std_error, file=sys.stderr)
+        print >>sys.stderr, "Area Under Curve (average) = ", average
+        print >>sys.stderr, "Area Under Curve (standard deviation) = ", std_deviation
+        print >>sys.stderr, "Area Under Curve (standard error) = ", std_error
     else:
         C = F(S.sweep_threshold(tie_mode=options.tie_mode))
         C.write_to_file(sys.stdout)
-        print("Area Under Curve = ", C.area(), file=sys.stderr)
+        print >>sys.stderr, "Area Under Curve = ", C.area()
 
     if options.best_file:
         file = open(options.best_file, 'w')
         C = F(S.sweep_threshold_best())
         C.write_to_file(file)
-        print("Area Under Best Curve = ", C.area(), file=sys.stderr) 
+        print >>sys.stderr, "Area Under Best Curve = ", C.area() 
 
     if options.worst_file:
         file = open(options.worst_file, 'w')
         C = F(S.sweep_threshold_worst())
         C.write_to_file(file)
-        print("Area Under Worst Curve = ", C.area(), file=sys.stderr)
+        print >>sys.stderr, "Area Under Worst Curve = ", C.area()
 
     if options.random_file:
         curve, average, std_deviation = SampleCurves(lambda : F(S.sweep_threshold_random()), options.samples)
@@ -69,9 +69,9 @@ def main(argv):
 
         file = open(options.random_file, 'w')
         curve.write_to_file(file)
-        print("Area Under Random Curve (average) = ", average, file=sys.stderr)
-        print("Area Under Random Curve (standard deviation) = ", std_deviation, file=sys.stderr)
-        print("Area Under Random Curve (standard error) = ", std_error, file=sys.stderr)
+        print >>sys.stderr, "Area Under Random Curve (average) = ", average
+        print >>sys.stderr, "Area Under Random Curve (standard deviation) = ", std_deviation
+        print >>sys.stderr, "Area Under Random Curve (standard error) = ", std_error
 
 if __name__=="__main__":
     main(sys.argv[1:])
