@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 # This file is part of 'miniver': https://github.com/jbweston/miniver
 #
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
+
 from builtins import dict
 from builtins import open
 from builtins import super

@@ -5,9 +5,6 @@
 # distribution is made.  The magic value "__use_git__" is interpreted by
 # _version.py.
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 version = "__use_git__"
 
 # These values are only set if the distribution was created with 'git archive'
