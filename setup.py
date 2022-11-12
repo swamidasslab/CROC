@@ -14,12 +14,12 @@ def get_version_and_cmdclass(pkg_path):
         "version",
         os.path.join(pkg_path, "_version.py"),
     )
-    module = module_from_spec(spec)  # type: ignore
-    spec.loader.exec_module(module)  # type: ignore
+    module = module_from_spec(spec)  
+    spec.loader.exec_module(module)  
     return module.__version__, module.get_cmdclass(pkg_path)
 
 
-version, cmdclass = get_version_and_cmdclass("CROC")
+version, cmdclass = get_version_and_cmdclass("croc")
 
 
 setup(name="CROC",
