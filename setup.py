@@ -58,7 +58,7 @@ With this package, one can easily:
 #. Focus on the early part of the ROC curve by using several x-axis transforms.
 
 The docstrings in this module are fairly complete and the scripts provide simple access to
-the most common functions. Further documentation can be found at http://swami.wustl.edu/CROC/
+the most common functions. 
 """,
     author="S. Joshua Swamidass",
     url="http://swami.wustl.edu/CROC",
