@@ -1,19 +1,8 @@
 # -*- coding: utf-8 -*-
 # This file is part of 'miniver': https://github.com/jbweston/miniver
 #
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-from builtins import dict
-from builtins import open
-from builtins import super
 from collections import namedtuple
 import os
-import subprocess
-
-from setuptools.command.build_py import build_py as build_py_orig
-from setuptools.command.sdist import sdist as sdist_orig
 
 Version = namedtuple("Version", ("release", "dev", "labels"))
 
@@ -69,6 +58,8 @@ def pep440_format(version_info):
 
 
 def get_version_from_git():
+    import subprocess
+
     # git describe --first-parent does not take into account tags from branches
     # that were merged-in. The '--long' flag gets us the 'dev' version and
     # git hash, '--always' returns the git hash even if there are no tags.
@@ -142,8 +133,7 @@ def get_version_from_git_archive(version_info):
     refs = set(r.strip() for r in refnames.split(","))
     version_tags = set(r[len(VTAG) :] for r in refs if r.startswith(VTAG))
     if version_tags:
-        _3to2list = list(sorted(version_tags))
-        release, _, = _3to2list[:1] + [_3to2list[1:]]  # prefer e.g. "2.0" over "2.0rc1"
+        release, *_ = sorted(version_tags)  # prefer e.g. "2.0" over "2.0rc1"
         return Version(release, dev=None, labels=None)
     else:
         return Version("unknown", dev=None, labels=["g{}".format(git_hash)])
@@ -172,6 +162,9 @@ def _write_version(fname):
 
 
 def get_cmdclass(pkg_source_path):
+    from setuptools.command.build_py import build_py as build_py_orig
+    from setuptools.command.sdist import sdist as sdist_orig
+
     class _build_py(build_py_orig):
         def run(self):
             super().run()
@@ -179,20 +172,14 @@ def get_cmdclass(pkg_source_path):
             src_marker = "".join(["src", os.path.sep])
 
             if pkg_source_path.startswith(src_marker):
-                path = pkg_source_path[len(src_marker):]
+                path = pkg_source_path[len(src_marker) :]
             else:
                 path = pkg_source_path
-            _write_version(
-                os.path.join(
-                    self.build_lib, path, STATIC_VERSION_FILE
-                )
-            )
+            _write_version(os.path.join(self.build_lib, path, STATIC_VERSION_FILE))
 
     class _sdist(sdist_orig):
         def make_release_tree(self, base_dir, files):
             super().make_release_tree(base_dir, files)
-            _write_version(
-                os.path.join(base_dir, pkg_source_path, STATIC_VERSION_FILE)
-            )
+            _write_version(os.path.join(base_dir, pkg_source_path, STATIC_VERSION_FILE))
 
     return dict(sdist=_sdist, build_py=_build_py)
