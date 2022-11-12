@@ -49,17 +49,16 @@ R-Interface
 
 Daniel Himmelstein has written up a basic R interface to CROC which is avialable on github (`here <https://github.com/dhimmel/crocr>`_).
 
-Development Status
--------------------
+Roadmap
+---------------
 
-On 3/14/2010 this project officially moved out of beta and is now designated a stable release.
-Please email the author_ if you discover any bugs. 
+- Github repository established
+- As of v1.2, this package now compatible with Python 3. 
 
-Future versions will include several enhancements, including:
+TODO:
 
-#. the significance tests described in paper.
-#. better performance and removal of dependence on Sympy.
-
-The priority of these improvements will be, in part, directed by interest from users.
+- Improve test cases (beyond just doctests)
+- Refactor to use numpy for v2.0
+- Improved CLI interface for v2.0
 
 .. _author : http://swami.wustl.edu/

@@ -1,6 +1,7 @@
 import math
 import random
 from functools import reduce
+from ._version import __version__
 
 
 def SampleCurves(sample, N=500):
@@ -211,9 +212,9 @@ class ScoredData:
                     TN = int(TN)
                     yield TP, TN, FP, FN
                 else:
-                    yield float(TP.evalf()), float(TN.evalf()), float(
-                        FP.evalf()
-                    ), float(FN.evalf())
+                    yield float(TP), float(TN), float(
+                        FP
+                    ), float(FN)
 
         assert TN == 0
         assert FN == 0
@@ -387,7 +388,7 @@ class Curve:
         """
         Read a curve from in a input file.
 
-        >>> from StringIO import StringIO
+        >>> from io import StringIO
         >>> file = StringIO('0 0 \\n 0 1 \\n 1 1')
         >>> Curve.read_from_file(file)
         Curve([(0.0, 0.0), (0.0, 1.0), (1.0, 1.0)])
@@ -520,7 +521,7 @@ class Curve:
 
         >>> C = Curve([(0,0), (1,1)])
         >>> for x, y in C:
-        ...     print x, y
+        ...     print(x, y)
         0.0 0.0
         1.0 1.0
         """

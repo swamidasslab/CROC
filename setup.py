@@ -1,44 +1,29 @@
-import commands 
 import os
 import time
 import sys
 
 from distutils.core import setup
 
-#Determine & save the revision number for the ETC
-warning=""
-vfname=os.path.join('.','VERSION')
-try:
-    # Always try to determine the version using svnversion
-    warning=""
-    stat,revset=commands.getstatusoutput('hg id -n')
-    if stat != 0:
-        raise ValueError("cannot extract version information")
-    if revset.find("+") >= 0 :
-        warning="this copy is modified."
 
-    f=open(vfname,'w')
-    f.write(revset)
-    f.close()
+# Loads _version.py module without importing the whole package.
+def get_version_and_cmdclass(pkg_path):
+    import os
+    from importlib.util import module_from_spec, spec_from_file_location
 
-except ValueError:
-    #If we can't generate it, then see if the version file already
-    #exists from when the source distribution was being assembled. 
-    try :
-        f=open(vfname,"r")
-        revset=f.readline()
-        f.close()
-    except IOError:
-        warning="Can't determine version."
-        sys.exit()
+    spec = spec_from_file_location(
+        "version",
+        os.path.join(pkg_path, "_version.py"),
+    )
+    module = module_from_spec(spec)  # type: ignore
+    spec.loader.exec_module(module)  # type: ignore
+    return module.__version__, module.get_cmdclass(pkg_path)
 
-VERSION = "1.1."+revset
 
-print(warning)
-print("assuming that the version is " + VERSION)
+version, cmdclass = get_version_and_cmdclass("CROC")
+
 
 setup(name="CROC",
-    version=VERSION,
+    version=version,
     description="A package for calculating ROC curves and Concentrated ROC (CROC) curves.",
     long_description="""================
 The CROC Package
@@ -71,7 +56,6 @@ With this package, one can easily:
 The docstrings in this module are fairly complete and the scripts provide simple access to
 the most common functions. Further documentation can be found at http://swami.wustl.edu/CROC/
 """,
-    requires=["sympy"],
     author="S. Joshua Swamidass",
     url="http://swami.wustl.edu/CROC",
     author_email="swamidass@gmail.com",
