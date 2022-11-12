@@ -35,6 +35,21 @@ jobs:
           name: pytest
           command: python -m pytest 
 
+
+  test_py2_7:
+    docker:
+      - image: python:2.7
+    steps:
+      - checkout  
+      - run:
+          name: update pip
+          command: /usr/local/bin/python -m pip install --upgrade pip
+      - python/install-packages:
+          pkg-manager: pip
+      - run: 
+          name: pytest
+          command: python -m pytest 
+
   build_upload:
     docker:
       - image: python:3.9
@@ -62,10 +77,16 @@ workflows:
             tags:
               only: /^v.*/
 
+      - test_py2_7:
+          filters:
+            tags:
+              only: /^v.*/
+
       - build_upload:
           requires:
             - test_py3_9
             - test_py3_10
+            - test_py2_7
           filters:
             tags:
               only: /^v.*/

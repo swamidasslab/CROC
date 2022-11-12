@@ -1,3 +1,13 @@
+from __future__ import division
+from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import unicode_literals
+from builtins import str
+from builtins import range
+from builtins import int
+from future import standard_library
+standard_library.install_aliases()
+from builtins import object
 import math
 import random
 from functools import reduce
@@ -47,7 +57,7 @@ def BEDROC(scoreddata, alpha):
     return out
 
 
-class ScoredData:
+class ScoredData(object):
     def __init__(self, scored_labels=[]):
         """The base constructor for this class which takes as input a list of 2-tuples representing
         paired scores (as floats where larger scores mean more likely to be positive) and labels
@@ -335,7 +345,7 @@ def FloorAC(sweep):
     return C
 
 
-class Curve:
+class Curve(object):
     """A class that encodes, left to right, a monotonically increasing parametric curve."""
 
     @staticmethod
@@ -687,7 +697,7 @@ class Curve:
             raise ValueError("axis must be 'x' or 'y'")
 
 
-class Transform:
+class Transform(object):
     """The interface which all x-axis transforms should implement. The __call__ method
     should expect as map the input in the range [0,1] to the output domain [0,1] with
     f(0) = 0 and f(1) = 1.

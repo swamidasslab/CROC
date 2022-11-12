@@ -1,3 +1,9 @@
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from future import standard_library
+standard_library.install_aliases()
 import os
 import time
 import sys
@@ -59,12 +65,16 @@ the most common functions. Further documentation can be found at http://swami.wu
     author="S. Joshua Swamidass",
     url="http://swami.wustl.edu/CROC",
     author_email="swamidass@gmail.com",
+    install_requires=["future"],
     classifiers=["Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: MIT License",
         "Intended Audience :: Science/Research",
         "License :: Free for non-commercial use",
         "Natural Language :: English",
         "Environment :: Console",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Topic :: Scientific/Engineering",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "Topic :: Scientific/Engineering :: Bio-Informatics",

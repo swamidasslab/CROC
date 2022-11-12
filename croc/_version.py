@@ -1,6 +1,15 @@
 # -*- coding: utf-8 -*-
 # This file is part of 'miniver': https://github.com/jbweston/miniver
 #
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from builtins import dict
+from builtins import open
+from builtins import super
+from future import standard_library
+standard_library.install_aliases()
 from collections import namedtuple
 import os
 import subprocess
@@ -135,7 +144,8 @@ def get_version_from_git_archive(version_info):
     refs = set(r.strip() for r in refnames.split(","))
     version_tags = set(r[len(VTAG) :] for r in refs if r.startswith(VTAG))
     if version_tags:
-        release, *_ = sorted(version_tags)  # prefer e.g. "2.0" over "2.0rc1"
+        _3to2list = list(sorted(version_tags))
+        release, _, = _3to2list[:1] + [_3to2list[1:]]  # prefer e.g. "2.0" over "2.0rc1"
         return Version(release, dev=None, labels=None)
     else:
         return Version("unknown", dev=None, labels=["g{}".format(git_hash)])
